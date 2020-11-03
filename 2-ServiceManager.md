@@ -8,7 +8,7 @@
 
 
 
-Philippe Thomas - November 2020
+Philippe Thomas - September 2020
 
 
 
@@ -18,7 +18,7 @@ During this lab, we are going to manipulate some basic aspects of the **console*
 
 
 
-#Task 1 - Access CP4M console
+# Task 1 - Access CP4M console
 
 Be sure to use the latest **Firefox** internet browser.  
 
@@ -76,7 +76,7 @@ You can spend more time building applications and less time  building environmen
 
 # Task 3 - Check your connection
 
-We already have defined a cloud connection to **IBM Cloud** for you. So you don't have to create a new one.
+We already have defined a cloud connection to IBM Cloud for you. So you don't have to create a new one.
 
 The name of the connection is **KEVIN**.
 
