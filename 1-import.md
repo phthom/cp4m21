@@ -8,7 +8,7 @@
 
 
 
-Philippe Thomas - September 2020
+Philippe Thomas - Novembre 2020
 
 
 
@@ -72,7 +72,15 @@ You can see some of the commands that are necessary for your day to day manageme
 
 The IBM Cloud Pak CLI is one of the most important command line tool that you can use to control a Cloud Pak : **cloudctl**
 
-Open a terminal window on your laptop, ssh to your work environment and check that you have installed cloudctl:
+To use the command line, you must access a RHEL VM where we already installed the several commands.
+
+Use Putty or ssh to get access to that VM (please specify the **IP and password** given by the instructor)
+
+``` bash
+ssh root@<IP>
+```
+
+Check that you have cloudctl already installed:
 
 ```bash
 cloudctl
@@ -125,60 +133,39 @@ GLOBAL OPTIONS:
 
 This command is very usefull to control the security aspects, the catalog, the clusters, helm init variables, metering and finally password and tokens in CP4M. 
 
-If you want to use the autocompletion, type the folloing command:
 
-```bash
-cloudctl completion bash > cloudctl_complete.sh; source cloudctl_complete.sh
-```
 
-To get access to CP4M with the cloudctl command line, type the following log in command:
+If you want to get access to the OpenShift Console, go to https://cloud.ibm.com
 
-```bash
-cloudctl login [-a CLUSTER_URL] [-u USERNAME] [-p PASSWORD]  [-c ACCOUNT_ID or ACCOUNT_NAME] [-n namespace] [--skip-ssl-validation] 
-```
+Use the **credentials** given by the instructor:
 
-For example:
+![image-20201103194840604](images/image-20201103194840604-4429320.png)
 
-```bash
-cloudctl login -a cloudctl login -a cp-console.niceaz-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.ams03.containers.appdomain.cloud -u admin -p <password> -n default
-```
+Once connected, be sure to use the KEVIN account on the top right side:
 
-Results:
+![image-20201103195054416](images/image-20201103195054416-4429454.png)
 
-```bash
-# cloudctl login -a cloudctl login -a cp-console.niceaz-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.ams03.containers.appdomain.cloud -u admin -p W0qhzcskdjgzgfsdfC1AvS1OZ -n default 
-OK
+Then Select the unique cluster:
 
-Targeted account mycluster Account
-
-Targeted namespace default
-
-Configuring kubectl ...
-Property "clusters.mycluster" unset.
-Property "users.mycluster-user" unset.
-Property "contexts.mycluster-context" unset.
-Cluster "mycluster" set.
-User "mycluster-user" set.
-Context "mycluster-context" created.
-Switched to context "mycluster-context".
-OK
-
-Configuring helm: /Users/phil/.helm
-OK
-
-```
-
-You can now display the cluster HUB status (where CP4M is running):
-
-```bash
-cloudctl cm cluster-status
-```
+![image-20201103195132004](images/image-20201103195132004-4429492.png)
 
 
 
-![image-20201008091816463](images/image-20201008091816463-2141496.png)
+Then select again the openshift cluster:
 
-With both the CP4M console and the cloudctl command, you are now ready to work.
+![image-20201103195226644](images/image-20201103195226644-4429546.png)
+
+Then select the blue button :
+
+![image-20201103195343141](images/image-20201103195343141-4429623.png)
+
+
+
+At this point, you should see the OpenShift Console :
+
+![image-20201103195447356](images/image-20201103195447356-4429687.png)
+
+ This console is the Cluster HUB OpenShift Console. 
 
 
 
@@ -308,11 +295,11 @@ Finally, you can navigate in the different item and capabilities on the **humber
 
 ![image-20201008103146378](images/image-20201008103146378-2145906.png)
 
-![image-20201008103217819](images/image-20201008103217819-2145937.png)
+Then :
 
-The one that we are going to use a lot is the **Automate Infrastructure** and the **Manage Services**:
+![image-20201103195807106](images/image-20201103195807106-4429887.png)
 
-![image-20201008103354972](images/image-20201008103354972-2146035.png)
+
 
 
 
@@ -320,9 +307,9 @@ The one that we are going to use a lot is the **Automate Infrastructure** and th
 
 From the **menu**, Click on **Automate Infrastructure**, and the **Clusters**:
 
-![image-20201008103953042](images/image-20201008103953042-2146393.png) 
+![image-20201103200141210](images/image-20201103200141210-4430101.png) 
 
-At this point, you should have only one cluster: the **local cluster** (this is the HUB cluster):
+At this point, you should have only one cluster: the **local cluster** (this is the HUB cluster) or none if you didn't import any cluster yet:
 
 ![image-20201008104050521](images/image-20201008104050521-2146450.png)
 
@@ -350,7 +337,7 @@ A curl command has been generated for you.
 
 Clcick on the copy button ![image-20201008124248960](images/image-20201008124248960-2153769.png)
 
-Open a new terminal window on your laptop or on you your work environment. Login with ssh or putty to the remote cluster :
+Go to you terminal window (the one that you already open in task 1). If not done, login with ssh or putty to the remote cluster :
 
 > You need the IP address and the password that will be given by the instructor
 
@@ -369,12 +356,15 @@ Last login: Thu Oct  8 06:10:07 2020 from niceremotecluster01.ibm.ws
 Once you are connected, check your remote cluster is up and running:
 
 ```bash
+
 kubectl get nodes
 NAME             STATUS   ROLES                                 AGE   VERSION
 161.156.96.200   Ready    etcd,management,master,proxy,worker   68m   v1.13.9+icp
 ```
 
 This remote cluster is a All in One Cluster (only one VM running master and worker). 
+
+If you are not connected, use `./connect.sh`to re-connect to the local cluster. 
 
 Now paste the curl command that you got from the IMPORT process (as an example):
 
@@ -428,21 +418,7 @@ Now go back to the CP4M console and click on **Clusters**: you should see your n
 
 ![image-20201008134245363](images/image-20201008134245363-2157365.png)
 
-You notice that your remote cluster  is added to the list. You can add labels to identify your new cluster. On the managed-cluster row, click the three dots icon and select **Edit labels** :
-
-![image-20201008134456693](images/image-20201008134456693-2157496.png)
-
-Then add a new label named **environment** with a value of QA  
-
-![image-20201008134808965](images/image-20201008134808965-2157689.png)
-
-Then **Click +** and then **Save**.
-
-Doublecheck the labels:
-
-![image-20201008135040533](images/image-20201008135040533-2157840.png)
-
-
+You notice that your remote cluster  is added to the list. 
 
 Now visualize your clusters in the **overview**:
 
