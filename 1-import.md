@@ -25,7 +25,7 @@ Be sure to use the latest **Firefox** internet browser.
 To get access the CP4M console, the instructor will give you a URL similar to the one below:
 
 ```http
-https://cp-console.niceaz-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.ams03.containers.appdomain.cloud
+https://cp-console.nicebe-ba36b2ed0b6b09dbc627b56ceec2f2a4-0000.eu-de.containers.appdomain.cloud
 ```
 
 The Credentials are **admin** and a password given by the instructor.  
